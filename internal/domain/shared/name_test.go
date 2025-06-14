@@ -1,6 +1,8 @@
 package shared
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewName_ValidNames(t *testing.T) {
 	validNames := []string{
@@ -37,6 +39,22 @@ func TestNewName_InvalidNames(t *testing.T) {
 		_, err := NewName(input)
 		if err == nil {
 			t.Errorf("expected error for invalid name input %q, but got none", input)
+		}
+	}
+}
+
+func TestName_String(t *testing.T) {
+	names := []string{
+		"Dude",
+		"Antedeguemon",
+		"Roronoa Zoro",
+		"Sara Connor",
+	}
+
+	for _, input := range names {
+		name, _ := NewName(input)
+		if name.String() != input {
+			t.Errorf("expected %q to be formatted as %q", name.String(), input)
 		}
 	}
 }
