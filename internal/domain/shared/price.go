@@ -26,8 +26,8 @@ func NewPrice(amount string) (Price, error) {
 		return Price{}, errors.New("NewPrice(): invalid amount")
 	}
 
-	// Verify that the amount is greater than zero
-	if d.LessThanOrEqual(decimal.Zero) {
+	// Verify that the amount is greater than or equal to zero
+	if d.LessThan(decimal.Zero) {
 		return Price{}, errors.New("NewPrice(): amount must be positive")
 	}
 
