@@ -1,6 +1,9 @@
 package product
 
-import "otel-prometheus-study/internal/domain/shared"
+import (
+	"fmt"
+	"otel-prometheus-study/internal/domain/shared"
+)
 
 type Product struct {
 	id    shared.ID
@@ -14,6 +17,10 @@ func (p Product) Name() string {
 
 func (p Product) Price() string {
 	return p.price.String()
+}
+
+func (p Product) String() string {
+	return fmt.Sprintf("{'id': '%d', 'name': '%s', 'price': '%s'}", p.id.Value(), p.name.Value(), p.price.Value())
 }
 
 func NewProduct(inputID int, inputName, inputPrice string) (Product, error) {
