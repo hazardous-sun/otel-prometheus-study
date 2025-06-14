@@ -6,6 +6,8 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// Price
+// Represents a validated price using a decimal value.
 type Price struct {
 	value decimal.Decimal
 }
@@ -18,6 +20,9 @@ func (p Price) String() string {
 	return p.value.StringFixed(2)
 }
 
+// NewPrice
+// Parses and validates the price string.
+// It must be a non-negative decimal
 func NewPrice(amount string) (Price, error) {
 	// Parse the amount as a decimal
 	d, err := decimal.NewFromString(amount)
