@@ -5,12 +5,17 @@ import (
 	"otel-prometheus-study/internal/domain/shared"
 )
 
+// Stock
+// Represents inventory for a product.
+// It includes a unique stock ID, a reference to the product ID, and a quantity.
 type Stock struct {
 	id       shared.ID
 	product  shared.ID
 	quantity int
 }
 
+// NewStock
+// Creates a new Stock instance after validating the input.
 func NewStock(id, productID int, quantity int) (Stock, error) {
 	if quantity < 0 {
 		return Stock{}, fmt.Errorf("NewStock(): quantity must be non-negative")
