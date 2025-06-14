@@ -5,6 +5,8 @@ import (
 	"otel-prometheus-study/internal/domain/shared"
 )
 
+// Product
+// Represents a product entity with ID, Name, and Price.
 type Product struct {
 	id    shared.ID
 	name  shared.Name
@@ -23,6 +25,8 @@ func (p Product) String() string {
 	return fmt.Sprintf("{'id': '%d', 'name': '%s', 'price': '%s'}", p.id.Value(), p.name.Value(), p.price.Value())
 }
 
+// NewProduct
+// Creates a new Product instance, validating ID, Name, and Price inputs.
 func NewProduct(inputID int, inputName, inputPrice string) (Product, error) {
 	// Check if inputID is a valid ID
 	id, err := shared.NewID(inputID)
