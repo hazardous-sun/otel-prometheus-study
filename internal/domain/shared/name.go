@@ -27,6 +27,10 @@ func (n Name) Value() string {
 	return n.value
 }
 
+func (n Name) String() string {
+	return n.value
+}
+
 func NewName(value string) (Name, error) {
 	trimmed := strings.TrimSpace(value)
 
