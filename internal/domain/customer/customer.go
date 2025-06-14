@@ -5,6 +5,8 @@ import (
 	"otel-prometheus-study/internal/domain/shared"
 )
 
+// Customer
+// Represents a customer entity with an ID and a Name.
 type Customer struct {
 	id   shared.ID
 	name shared.Name
@@ -22,6 +24,8 @@ func (c Customer) String() string {
 	return fmt.Sprintf("{'id': '%d', 'name': '%s'}", c.id.Value(), c.name.Value())
 }
 
+// NewCustomer
+// Creates a new Customer instance after validating ID and Name inputs.
 func NewCustomer(inputId int, inputName string) (Customer, error) {
 	// Check if inputId is a valid ID
 	id, err := shared.NewID(inputId)
