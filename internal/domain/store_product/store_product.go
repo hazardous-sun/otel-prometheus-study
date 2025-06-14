@@ -5,6 +5,9 @@ import (
 	"otel-prometheus-study/internal/domain/shared"
 )
 
+// StoreProduct
+// Represents the association of a product with a store,
+// including the store ID, product ID, specific price, and quantity available.
 type StoreProduct struct {
 	storeID   shared.ID
 	productID shared.ID
@@ -12,6 +15,9 @@ type StoreProduct struct {
 	quantity  int
 }
 
+// NewStoreProduct
+// Creates a new StoreProduct after validating the storeID, productID, price, and quantity.
+// Returns an error if any validation fails (e.g., negative quantity or invalid price).
 func NewStoreProduct(storeID, productID int, price string, quantity int) (StoreProduct, error) {
 	if quantity < 0 {
 		return StoreProduct{}, fmt.Errorf("NewStoreProduct(): quantity must be non-negative")
