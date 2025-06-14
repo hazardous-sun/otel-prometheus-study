@@ -19,6 +19,8 @@ var (
 	validNameRegex = regexp.MustCompile(`^[\p{L} '-]+$`)
 )
 
+// Name
+// Represents a validated name.
 type Name struct {
 	value string
 }
@@ -31,6 +33,9 @@ func (n Name) String() string {
 	return n.value
 }
 
+// NewName
+// Validates and constructs a new Name.
+// Rejects names with digits, special characters, or control characters.
 func NewName(value string) (Name, error) {
 	trimmed := strings.TrimSpace(value)
 
