@@ -1,6 +1,7 @@
 package product
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 )
@@ -71,5 +72,21 @@ func TestNewProduct_InvalidPrice(t *testing.T) {
 		if err == nil {
 			t.Errorf("expected invalid product price %q to generate error", prices[i])
 		}
+	}
+}
+
+func TestProduct_String(t *testing.T) {
+	id := 123
+	name := "Test Product"
+	price := "49.99"
+
+	product, err := NewProduct(id, name, price)
+	if err != nil {
+		t.Fatalf("expected valid product, got error: %v", err)
+	}
+
+	expectedString := fmt.Sprintf("{'id': '%d', 'name': '%s', 'price': '%s'}", id, name, price)
+	if product.String() != expectedString {
+		t.Errorf("expected product.String() to return %q, got %q", expectedString, product.String())
 	}
 }
