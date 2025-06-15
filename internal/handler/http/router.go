@@ -3,6 +3,7 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"otel-prometheus-study/internal/logger"
 )
 
 func NewRouter(
@@ -12,6 +13,7 @@ func NewRouter(
 	storeCtrl StoreController,
 	storeProductCtrl StoreProductController,
 ) *gin.Engine {
+	logger.LogInfo("initializing router")
 	router := gin.New()
 
 	// Global middleware

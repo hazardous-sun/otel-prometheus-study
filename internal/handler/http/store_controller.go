@@ -1,6 +1,9 @@
 package http
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"otel-prometheus-study/internal/logger"
+)
 
 type StoreController struct {
 	// TODO : implement this
@@ -23,5 +26,6 @@ func (s *StoreController) Update(ctx *gin.Context) {
 }
 
 func NewStoreController() StoreController {
+	logger.LogInfo("initializing store controller")
 	return StoreController{}
 }
