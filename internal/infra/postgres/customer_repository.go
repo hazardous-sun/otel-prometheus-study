@@ -6,7 +6,7 @@ import (
 	"github.com/lib/pq"
 	"otel-prometheus-study/internal/domain/customer"
 	"otel-prometheus-study/internal/domain/shared"
-	"otel-prometheus-study/internal/logger" // import your custom logger
+	"otel-prometheus-study/internal/logger"
 	"strings"
 )
 
@@ -51,4 +51,28 @@ func (cr CustomerRepository) InsertCustomer(customer customer.Customer) (custome
 	customer.IDValue = newID
 	logger.LogSuccess("Customer inserted successfully", "id", newID.Value(), "name", name)
 	return customer, nil
+}
+
+func (cr CustomerRepository) GetCustomerByID(customerID shared.ID) (customer.Customer, error) {
+	id := customerID.Value()
+	logger.LogDebug("Preparing select query", "id", id)
+
+	query, err := cr.connection.Prepare("SELECT id, name FROM customers WHERE id = $1")
+	if err != nil {
+		logger.LogError(err, "context", "preparing select statement")
+		if errors.Is(err, sql.ErrNoRows) {
+			return customer.Customer{}, errors.New("customer not found")
+		}
+		return customer.Customer{}, err
+	}
+	defer query.Close()
+
+	var customerObj customer.Customer
+
+	if err = query.QueryRow(id).Scan(&customerObj.IDValue, &customerObj.NameValue); err != nil {
+		logger.LogError(err, "context", "executing select query")
+		return customer.Customer{}, err
+	}
+
+	return customerObj, nil
 }
