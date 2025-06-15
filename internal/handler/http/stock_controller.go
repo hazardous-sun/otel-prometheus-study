@@ -21,7 +21,3 @@ func (s *StockController) Get(ctx *gin.Context) {
 func (s *StockController) Update(ctx *gin.Context) {
 	// TODO : implement this
 }
-
-func (s *StockController) Delete(ctx *gin.Context) {
-	// TODO : implement this
-}
