@@ -4,6 +4,7 @@ import (
 	"context"
 	"log/slog"
 	"os"
+	"otel-prometheus-study/internal/config"
 )
 
 var (
@@ -15,18 +16,18 @@ func init() {
 	opts := &slog.HandlerOptions{
 		Level: slog.LevelDebug,
 	}
-
-	// Use TextHandler (human-readable); use JSONHandler for structured logs
 	AppLogger = slog.New(slog.NewTextHandler(os.Stdout, opts))
 
-	// Optional: override default logger
+	// Override default logger
 	slog.SetDefault(AppLogger)
 }
 
 // LogDebug
 // Logs a debug message with optional key-value pairs
 func LogDebug(msg string, attrs ...any) {
-	AppLogger.Debug(msg, attrs...)
+	if config.DebugEnabled {
+		AppLogger.Debug(msg, attrs...)
+	}
 }
 
 // LogInfo
