@@ -68,7 +68,7 @@ func NewRouter(
 		storeProductGroup.POST("", storeProductCtrl.Create)
 		storeProductGroup.GET("", storeProductCtrl.List)
 		storeProductGroup.GET("/:id", storeProductCtrl.Get)
-		storeGroup.PUT("/:id", storeProductCtrl.Update)
+		storeProductGroup.PUT("/:id", storeProductCtrl.Update)
 	}
 
 	return router
