@@ -21,7 +21,3 @@ func (p *ProductController) Get(ctx *gin.Context) {
 func (p *ProductController) Update(ctx *gin.Context) {
 	// TODO : implement this
 }
-
-func (p *ProductController) Delete(ctx *gin.Context) {
-	// TODO : implement this
-}
