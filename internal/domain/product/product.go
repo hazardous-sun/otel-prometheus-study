@@ -13,6 +13,10 @@ type Product struct {
 	PriceValue shared.Price `json:"price"`
 }
 
+func (p Product) ID() int {
+	return p.IDValue.Value()
+}
+
 func (p Product) Name() string {
 	return p.NameValue.String()
 }
