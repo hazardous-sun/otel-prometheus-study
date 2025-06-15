@@ -17,3 +17,7 @@ func (c *CustomerController) List(ctx *gin.Context) {
 func (c *CustomerController) Get(ctx *gin.Context) {
 	// TODO : implement this
 }
+
+func NewCustomerController() CustomerController {
+	return CustomerController{}
+}

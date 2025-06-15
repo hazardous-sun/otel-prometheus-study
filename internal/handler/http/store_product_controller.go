@@ -21,3 +21,7 @@ func (s *StoreProductController) Get(ctx *gin.Context) {
 func (s *StoreProductController) Update(ctx *gin.Context) {
 	// TODO : implement this
 }
+
+func NewStoreProductController() StoreProductController {
+	return StoreProductController{}
+}
