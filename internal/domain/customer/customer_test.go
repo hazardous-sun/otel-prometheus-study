@@ -42,7 +42,7 @@ func TestNewCustomer_InvalidName(t *testing.T) {
 	for i := range ids {
 		_, err := NewCustomer(ids[i], names[i])
 		if err == nil {
-			t.Errorf("expected invalid customer name %q to generate error", names[i])
+			t.Errorf("expected invalid customer Name %q to generate error", names[i])
 		}
 	}
 }
@@ -56,7 +56,7 @@ func TestCustomer_String(t *testing.T) {
 		t.Fatalf("expected valid customer, got error: %v", err)
 	}
 
-	expectedString := fmt.Sprintf("{'id': '%d', 'name': '%s'}", id, name)
+	expectedString := fmt.Sprintf("{'ID': '%d', 'Name': '%s'}", id, name)
 	if customer.String() != expectedString {
 		t.Errorf("expected customer.String() to return %q, got %q", expectedString, customer.String())
 	}

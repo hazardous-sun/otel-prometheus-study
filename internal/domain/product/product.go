@@ -8,21 +8,21 @@ import (
 // Product
 // Represents a product entity with ID, Name, and Price.
 type Product struct {
-	id    shared.ID
-	name  shared.Name
-	price shared.Price
+	IDValue    shared.ID    `json:"id"`
+	NameValue  shared.Name  `json:"name"`
+	PriceValue shared.Price `json:"price"`
 }
 
 func (p Product) Name() string {
-	return p.name.String()
+	return p.NameValue.String()
 }
 
 func (p Product) Price() string {
-	return p.price.String()
+	return p.PriceValue.String()
 }
 
 func (p Product) String() string {
-	return fmt.Sprintf("{'id': '%d', 'name': '%s', 'price': '%s'}", p.id.Value(), p.name.Value(), p.price.Value())
+	return fmt.Sprintf("{'ID': '%d', 'Name': '%s', 'Price': '%s'}", p.IDValue.Value(), p.NameValue.Value(), p.PriceValue.Value())
 }
 
 // NewProduct
@@ -35,14 +35,14 @@ func NewProduct(inputID int, inputName, inputPrice string) (Product, error) {
 		return Product{}, err
 	}
 
-	// Check if inputName is a valid name
+	// Check if inputName is a valid Name
 	name, err := shared.NewName(inputName)
 
 	if err != nil {
 		return Product{}, err
 	}
 
-	// Check if inputPrice is a valid price
+	// Check if inputPrice is a valid Price
 	price, err := shared.NewPrice(inputPrice)
 
 	if err != nil {

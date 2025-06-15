@@ -10,9 +10,9 @@ import (
 // Represents a physical or virtual store entity.
 // Each store has an ID, a Name, and a list of StoreProduct items.
 type Store struct {
-	id            shared.ID
-	name          shared.Name
-	storeProducts []store_product.StoreProduct
+	IDValue       shared.ID                    `json:"id"`
+	NameValue     shared.Name                  `json:"name"`
+	StoreProducts []store_product.StoreProduct `json:"storeProductsIDs"`
 }
 
 // NewStore
@@ -29,25 +29,25 @@ func NewStore(inputID int, inputName string) (Store, error) {
 		return Store{}, err
 	}
 
-	return Store{id: id, name: name, storeProducts: []store_product.StoreProduct{}}, nil
+	return Store{IDValue: id, NameValue: name, StoreProducts: []store_product.StoreProduct{}}, nil
 }
 
-func (s Store) ID() int                                { return s.id.Value() }
-func (s Store) Name() string                           { return s.name.Value() }
-func (s Store) Products() []store_product.StoreProduct { return s.storeProducts }
+func (s Store) ID() int                                { return s.IDValue.Value() }
+func (s Store) Name() string                           { return s.NameValue.Value() }
+func (s Store) Products() []store_product.StoreProduct { return s.StoreProducts }
 
 // AddProduct
 // Adds a StoreProduct to the store's inventory.
 // Returns an error if the StoreProduct does not belong to this store.
-func (s *Store) AddProduct(sp store_product.StoreProduct) error {
+func (s Store) AddProduct(sp store_product.StoreProduct) error {
 	if sp.StoreID() != s.ID() {
 		return fmt.Errorf("AddProduct(): StoreProduct does not belong to this store")
 	}
-	s.storeProducts = append(s.storeProducts, sp)
+	s.StoreProducts = append(s.StoreProducts, sp)
 	return nil
 }
 
 // String returns a formatted string representation of the Store.
 func (s Store) String() string {
-	return fmt.Sprintf("{'id': '%d', 'name': '%s', 'products_count': %d}", s.ID(), s.Name(), len(s.storeProducts))
+	return fmt.Sprintf("{'ID': '%d', 'Name': '%s', 'products_count': %d}", s.ID(), s.Name(), len(s.StoreProducts))
 }

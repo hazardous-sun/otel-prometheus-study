@@ -7,20 +7,20 @@ import (
 
 // StoreProduct
 // Represents the association of a product with a store,
-// including the store ID, product ID, specific price, and quantity available.
+// including the store ID, product ID, specific Price, and Quantity available.
 type StoreProduct struct {
-	storeID   shared.ID
-	productID shared.ID
-	price     shared.Price
-	quantity  int
+	StoreIDValue   shared.ID    `json:"storeID"`
+	ProductIDValue shared.ID    `json:"productID"`
+	PriceValue     shared.Price `json:"price"`
+	QuantityValue  int          `json:"quantity"`
 }
 
 // NewStoreProduct
-// Creates a new StoreProduct after validating the storeID, productID, price, and quantity.
-// Returns an error if any validation fails (e.g., negative quantity or invalid price).
+// Creates a new StoreProduct after validating the StoreID, ProductID, Price, and Quantity.
+// Returns an error if any validation fails (e.g., negative Quantity or invalid Price).
 func NewStoreProduct(storeID, productID int, price string, quantity int) (StoreProduct, error) {
 	if quantity < 0 {
-		return StoreProduct{}, fmt.Errorf("NewStoreProduct(): quantity must be non-negative")
+		return StoreProduct{}, fmt.Errorf("NewStoreProduct(): Quantity must be non-negative")
 	}
 
 	sID, err := shared.NewID(storeID)
@@ -39,21 +39,21 @@ func NewStoreProduct(storeID, productID int, price string, quantity int) (StoreP
 	}
 
 	return StoreProduct{
-		storeID:   sID,
-		productID: pID,
-		price:     pr,
-		quantity:  quantity,
+		StoreIDValue:   sID,
+		ProductIDValue: pID,
+		PriceValue:     pr,
+		QuantityValue:  quantity,
 	}, nil
 }
 
-func (sp StoreProduct) StoreID() int   { return sp.storeID.Value() }
-func (sp StoreProduct) ProductID() int { return sp.productID.Value() }
-func (sp StoreProduct) Price() string  { return sp.price.String() }
-func (sp StoreProduct) Quantity() int  { return sp.quantity }
+func (sp StoreProduct) StoreID() int   { return sp.StoreIDValue.Value() }
+func (sp StoreProduct) ProductID() int { return sp.ProductIDValue.Value() }
+func (sp StoreProduct) Price() string  { return sp.PriceValue.String() }
+func (sp StoreProduct) Quantity() int  { return sp.QuantityValue }
 
 func (sp StoreProduct) String() string {
 	return fmt.Sprintf(
-		"{'store_id': '%d', 'product_id': '%d', 'price': '%s', 'quantity': %d}",
+		"{'store_id': '%d', 'product_id': '%d', 'Price': '%s', 'Quantity': %d}",
 		sp.StoreID(), sp.ProductID(), sp.Price(), sp.Quantity(),
 	)
 }

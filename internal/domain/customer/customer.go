@@ -8,20 +8,20 @@ import (
 // Customer
 // Represents a customer entity with an ID and a Name.
 type Customer struct {
-	id   shared.ID
-	name shared.Name
+	IDValue   shared.ID   `json:"id"`
+	NameValue shared.Name `json:"name"`
 }
 
 func (c Customer) ID() int {
-	return c.id.Value()
+	return c.IDValue.Value()
 }
 
 func (c Customer) Name() string {
-	return c.name.Value()
+	return c.NameValue.Value()
 }
 
 func (c Customer) String() string {
-	return fmt.Sprintf("{'id': '%d', 'name': '%s'}", c.id.Value(), c.name.Value())
+	return fmt.Sprintf("{'ID': '%d', 'Name': '%s'}", c.IDValue.Value(), c.NameValue.Value())
 }
 
 // NewCustomer
@@ -33,7 +33,7 @@ func NewCustomer(inputId int, inputName string) (Customer, error) {
 		return Customer{}, err
 	}
 
-	// Check if inputName is a valid name
+	// Check if inputName is a valid Name
 	name, err := shared.NewName(inputName)
 	if err != nil {
 		return Customer{}, err

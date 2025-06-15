@@ -34,20 +34,20 @@ func TestNewStock_InvalidID(t *testing.T) {
 func TestNewStock_InvalidProductID(t *testing.T) {
 	_, err := NewStock(1, -5, 10)
 	if err == nil {
-		t.Error("expected error for negative product ID")
+		t.Error("expected error for negative Product ID")
 	}
 }
 
 func TestNewStock_NegativeQuantity(t *testing.T) {
 	_, err := NewStock(1, 101, -10)
 	if err == nil {
-		t.Error("expected error for negative quantity")
+		t.Error("expected error for negative Quantity")
 	}
 }
 
 func TestStock_String(t *testing.T) {
 	stock, _ := NewStock(1, 101, 20)
-	expected := fmt.Sprintf("{'id': '%d', 'product_id': '%d', 'quantity': %d}", 1, 101, 20)
+	expected := fmt.Sprintf("{'ID': '%d', 'product_id': '%d', 'Quantity': %d}", 1, 101, 20)
 	if stock.String() != expected {
 		t.Errorf("expected %q, got %q", expected, stock.String())
 	}

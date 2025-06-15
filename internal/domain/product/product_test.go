@@ -23,11 +23,11 @@ func TestNewProduct_ValidProduct(t *testing.T) {
 		// Compare prices as float64
 		expectedPrice, err := strconv.ParseFloat(prices[i], 64)
 		if err != nil {
-			t.Fatalf("failed to parse expected price %s: %v", prices[i], err)
+			t.Fatalf("failed to parse expected Price %s: %v", prices[i], err)
 		}
 		actualPrice, err := strconv.ParseFloat(product.Price(), 64)
 		if err != nil {
-			t.Errorf("failed to parse actual product price %s: %v", product.Price(), err)
+			t.Errorf("failed to parse actual product Price %s: %v", product.Price(), err)
 		}
 
 		if expectedPrice != actualPrice {
@@ -57,7 +57,7 @@ func TestNewProduct_InvalidName(t *testing.T) {
 	for i := range ids {
 		_, err := NewProduct(ids[i], names[i], prices[i])
 		if err == nil {
-			t.Errorf("expected invalid product name %q to generate error", names[i])
+			t.Errorf("expected invalid product Name %q to generate error", names[i])
 		}
 	}
 }
@@ -70,7 +70,7 @@ func TestNewProduct_InvalidPrice(t *testing.T) {
 	for i := range ids {
 		_, err := NewProduct(ids[i], names[i], prices[i])
 		if err == nil {
-			t.Errorf("expected invalid product price %q to generate error", prices[i])
+			t.Errorf("expected invalid product Price %q to generate error", prices[i])
 		}
 	}
 }
@@ -85,7 +85,7 @@ func TestProduct_String(t *testing.T) {
 		t.Fatalf("expected valid product, got error: %v", err)
 	}
 
-	expectedString := fmt.Sprintf("{'id': '%d', 'name': '%s', 'price': '%s'}", id, name, price)
+	expectedString := fmt.Sprintf("{'ID': '%d', 'Name': '%s', 'Price': '%s'}", id, name, price)
 	if product.String() != expectedString {
 		t.Errorf("expected product.String() to return %q, got %q", expectedString, product.String())
 	}

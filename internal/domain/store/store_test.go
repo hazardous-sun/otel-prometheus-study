@@ -31,13 +31,13 @@ func TestNewStore_InvalidID(t *testing.T) {
 func TestNewStore_InvalidName(t *testing.T) {
 	_, err := NewStore(10, "!!Invalid##Name")
 	if err == nil {
-		t.Error("expected error for invalid store name")
+		t.Error("expected error for invalid store Name")
 	}
 }
 
 func TestStore_String(t *testing.T) {
 	store, _ := NewStore(42, "Main HQ")
-	expected := fmt.Sprintf("{'id': '%d', 'name': '%s', 'products_count': 0}", 42, "Main HQ")
+	expected := fmt.Sprintf("{'ID': '%d', 'Name': '%s', 'products_count': 0}", 42, "Main HQ")
 
 	if store.String() != expected {
 		t.Errorf("expected %q, got %q", expected, store.String())

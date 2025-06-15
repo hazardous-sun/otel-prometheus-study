@@ -19,31 +19,31 @@ func TestNewStoreProduct_Valid(t *testing.T) {
 func TestNewStoreProduct_InvalidIDs(t *testing.T) {
 	_, err := NewStoreProduct(-1, 100, "10.00", 5)
 	if err == nil {
-		t.Error("expected error for negative storeID")
+		t.Error("expected error for negative StoreID")
 	}
 	_, err = NewStoreProduct(1, -5, "10.00", 5)
 	if err == nil {
-		t.Error("expected error for negative productID")
+		t.Error("expected error for negative ProductID")
 	}
 }
 
 func TestNewStoreProduct_InvalidPrice(t *testing.T) {
 	_, err := NewStoreProduct(1, 1, "abc", 5)
 	if err == nil {
-		t.Error("expected error for invalid price")
+		t.Error("expected error for invalid Price")
 	}
 }
 
 func TestNewStoreProduct_NegativeQuantity(t *testing.T) {
 	_, err := NewStoreProduct(1, 1, "9.99", -5)
 	if err == nil {
-		t.Error("expected error for negative quantity")
+		t.Error("expected error for negative Quantity")
 	}
 }
 
 func TestStoreProduct_String(t *testing.T) {
 	sp, _ := NewStoreProduct(2, 50, "14.00", 25)
-	expected := fmt.Sprintf("{'store_id': '%d', 'product_id': '%d', 'price': '%s', 'quantity': %d}", 2, 50, "14.00", 25)
+	expected := fmt.Sprintf("{'store_id': '%d', 'product_id': '%d', 'Price': '%s', 'Quantity': %d}", 2, 50, "14.00", 25)
 	if sp.String() != expected {
 		t.Errorf("expected %q, got %q", expected, sp.String())
 	}
