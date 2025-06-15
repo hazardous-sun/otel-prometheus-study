@@ -1,3 +1,5 @@
 package config
 
-// TODO : implement this
+var (
+	DebugEnabled = false
+)
