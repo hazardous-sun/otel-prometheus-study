@@ -1,3 +1,5 @@
 package http
 
-// TODO : implement this
+type ProductController struct {
+	// TODO : implement this
+}
