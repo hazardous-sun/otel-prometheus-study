@@ -76,3 +76,38 @@ func (cr CustomerRepository) GetCustomerByID(customerID shared.ID) (customer.Cus
 
 	return customerObj, nil
 }
+
+func (cr CustomerRepository) GetCustomers() ([]customer.Customer, error) {
+	query := "SELECT id, name FROM customers"
+
+	rows, err := cr.connection.Query(query)
+	if err != nil {
+		logger.LogError(err, "context", "executing select query")
+		return []customer.Customer{}, err
+	}
+	defer rows.Close()
+
+	var customerList []customer.Customer
+	var customerObj customer.Customer
+
+	for rows.Next() {
+		err = rows.Scan(
+			&customerObj.IDValue,
+			&customerObj.NameValue,
+		)
+
+		if err != nil {
+			logger.LogError(err, "context", "executing select query")
+			return []customer.Customer{}, err
+		}
+
+		customerList = append(customerList, customerObj)
+	}
+
+	if err = rows.Close(); err != nil {
+		logger.LogError(err, "context", "closing rows")
+		return []customer.Customer{}, err
+	}
+
+	return customerList, nil
+}
