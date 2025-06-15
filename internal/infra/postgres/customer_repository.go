@@ -111,3 +111,7 @@ func (cr CustomerRepository) GetCustomers() ([]customer.Customer, error) {
 
 	return customerList, nil
 }
+
+func NewCustomerRepository(connection *sql.DB) CustomerRepository {
+	return CustomerRepository{connection}
+}
