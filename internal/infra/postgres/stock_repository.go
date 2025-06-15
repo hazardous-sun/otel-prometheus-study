@@ -151,6 +151,18 @@ func (sr StockRepository) GetStocks() ([]stock.Stock, error) {
 	return stockList, nil
 }
 
+func (sr StockRepository) UpdateStockQuantity(stockID int, newQuantity int) error {
+	query := "UPDATE stocks SET quantity = $1 WHERE id = $2"
+
+	_, err := sr.connection.Exec(query, newQuantity, stockID)
+	if err != nil {
+		logger.LogError(err, "context", "updating stock quantity", "stock_id", stockID)
+		return err
+	}
+
+	return nil
+}
+
 func NewStockRepository(db *sql.DB) StockRepository {
 	return StockRepository{connection: db}
 }
