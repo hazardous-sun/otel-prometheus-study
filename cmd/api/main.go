@@ -1,24 +1,28 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
+	http2 "otel-prometheus-study/internal/handler/http"
 )
 
 func main() {
-	server := gin.Default()
+	// Initialize the controllers
+	customerCtrl := http2.NewCustomerController()
+	productCtrl := http2.NewProductController()
+	stockCtrl := http2.NewStockController()
+	storeCtrl := http2.NewStoreController()
+	storeProductCtrl := http2.NewStoreProductController()
 
-	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "pong",
-			"status":  http.StatusOK,
-		})
-	})
+	// Initialize the server with the controllers
+	server := http2.NewRouter(
+		customerCtrl,
+		productCtrl,
+		stockCtrl,
+		storeCtrl,
+		storeProductCtrl,
+	)
 
-	err := server.Run(":8000")
-
-	if err != nil {
+	if err := server.Run(":8000"); err != nil {
 		log.Fatal(err)
 		return
 	}
