@@ -12,10 +12,14 @@ type ProductRepository struct {
 	connection *sql.DB
 }
 
+func NewProductRepository(db *sql.DB) ProductRepository {
+	return ProductRepository{connection: db}
+}
+
 func (pr ProductRepository) InsertProduct(p product.Product) (product.Product, error) {
-	query := `INSERT INTO products (name, price) VALUES ($1, $2) RETURNING id`
+	query := `INSERT INTO Products (Name, Price) VALUES ($1, $2) RETURNING Id`
 	name := strings.ToLower(p.Name())
-	price := p.PriceValue.String()
+	price := p.PriceValue.Value()
 
 	var id int
 	err := pr.connection.QueryRow(query, name, price).Scan(&id)
@@ -33,7 +37,7 @@ func (pr ProductRepository) InsertProduct(p product.Product) (product.Product, e
 }
 
 func (pr ProductRepository) GetProducts() ([]product.Product, error) {
-	query := `SELECT id, name, price FROM products`
+	query := `SELECT Id, Name, Price FROM Products`
 	rows, err := pr.connection.Query(query)
 	if err != nil {
 		logger.LogError(err, "context", "GetProducts")
@@ -56,8 +60,4 @@ func (pr ProductRepository) GetProducts() ([]product.Product, error) {
 		list = append(list, prod)
 	}
 	return list, nil
-}
-
-func NewProductRepository(db *sql.DB) ProductRepository {
-	return ProductRepository{connection: db}
 }
