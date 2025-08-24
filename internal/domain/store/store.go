@@ -39,12 +39,12 @@ func (s Store) Products() []store_product.StoreProduct { return s.StoreProducts 
 // AddProduct
 // Adds a StoreProduct to the store's inventory.
 // Returns an error if the StoreProduct does not belong to this store.
-func (s Store) AddProduct(sp store_product.StoreProduct) error {
+func (s Store) AddProduct(sp store_product.StoreProduct) (Store, error) {
 	if sp.StoreID() != s.ID() {
-		return fmt.Errorf("AddProduct(): StoreProduct does not belong to this store")
+		return s, fmt.Errorf("AddProduct(): StoreProduct does not belong to this store")
 	}
 	s.StoreProducts = append(s.StoreProducts, sp)
-	return nil
+	return s, nil
 }
 
 // String returns a formatted string representation of the Store.

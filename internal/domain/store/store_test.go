@@ -48,7 +48,7 @@ func TestStore_AddProduct(t *testing.T) {
 	store, _ := NewStore(1, "Central")
 	sp, _ := store_product.NewStoreProduct(1, 101, "15.00", 50)
 
-	err := store.AddProduct(sp)
+	store, err := store.AddProduct(sp)
 	if err != nil {
 		t.Fatalf("expected product to be added successfully, got error: %v", err)
 	}
@@ -62,7 +62,7 @@ func TestStore_AddProduct_InvalidStoreID(t *testing.T) {
 	store, _ := NewStore(1, "Branch A")
 	sp, _ := store_product.NewStoreProduct(2, 105, "12.50", 10) // storeID != store.ID()
 
-	err := store.AddProduct(sp)
+	_, err := store.AddProduct(sp)
 	if err == nil {
 		t.Error("expected error due to mismatched store IDs")
 	}
