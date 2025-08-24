@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: docker.io/library/postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - otel-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: otel-api
+    ports:
+      - "8000:8000"
+      - "2112:2112"
+    networks:
+      - otel-network
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: postgres
+      DB_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy
+
+networks:
+  otel-network:
+    driver: bridge
