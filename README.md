@@ -24,15 +24,13 @@ The project follows a clean architecture pattern, separating concerns into disti
 - **Structured Logging**: Implements structured logging for better log management and analysis.
 - **Clean Architecture**: Follows a clean architecture pattern for maintainability and testability.
 
-# Getting Started
-
-## Prerequisites
+# Prerequisites
 
 - Go 1.24.4 or higher
 - Docker and Docker Compose
 - PostgreSQL client
 
-## Installation
+# Installation
 
 1. Clone the repository:
     ```Bash
@@ -40,8 +38,7 @@ The project follows a clean architecture pattern, separating concerns into disti
     cd otel-prometheus-study
     ```
 2. Install dependencies:
-    ```
-    Bash
+    ```Bash
     go mod tidy
     ```
 
