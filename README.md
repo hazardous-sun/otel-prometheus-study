@@ -67,38 +67,7 @@ go run cmd/api/main.go
 
 The API server will start on port `8000`.
 
-## API Endpoints
-
-The following API endpoints are available:
-
-- Customers
-    ```
-    GET /customers: List all customers
-    POST /customers: Create a new customer
-    GET /customers/:id: Get a customer by ID
-    ```
-- Products
-    ```
-    GET /products: List all products
-    POST /products: Create a new product
-    GET /products/:id: Get a product by ID
-    PUT /products/:id: Update a product by ID
-    ```
-- Stock
-    ```
-    GET /stocks: List all stock
-    POST /stocks: Create a new stock item
-    GET /stocks/:id: Get a stock item by ID
-    PUT /stocks/:id: Update a stock item by ID
-    ```
-- Stores
-    ```
-    GET /stores: List all stores
-    POST /stores: Create a new store
-    GET /stores/:id: Get a store by ID
-    PUT /stores/:id: Update a store by ID
-    ```
-- Monitoring
+## Monitoring
 
 The application exposes a /metrics endpoint on port 2112 for Prometheus to scrape. To view the metrics, you can access 
 http://localhost:2112/metrics in your browser.

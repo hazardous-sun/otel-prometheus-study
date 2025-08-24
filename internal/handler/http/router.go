@@ -1,9 +1,10 @@
 package http
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"otel-prometheus-study/internal/logger"
+
+	"github.com/gin-gonic/gin"
 )
 
 func NewRouter(
@@ -34,8 +35,6 @@ func NewRouter(
 	{
 		productGroup.POST("", productCtrl.Create)
 		productGroup.GET("", productCtrl.List)
-		productGroup.GET("/:id", productCtrl.Get)
-		productGroup.PUT("/:id", productCtrl.Update)
 	}
 
 	// Customer routes
@@ -43,7 +42,6 @@ func NewRouter(
 	{
 		customerGroup.POST("", customerCtrl.Create)
 		customerGroup.GET("", customerCtrl.List)
-		customerGroup.GET("/:id", customerCtrl.Get)
 	}
 
 	// Stock routes
@@ -51,8 +49,6 @@ func NewRouter(
 	{
 		stockGroup.POST("", stockCtrl.Create)
 		stockGroup.GET("", stockCtrl.List)
-		stockGroup.GET("/:id", stockCtrl.Get)
-		stockGroup.PUT("/:id", stockCtrl.Update)
 	}
 
 	// Store routes
@@ -60,8 +56,6 @@ func NewRouter(
 	{
 		storeGroup.POST("", storeCtrl.Create)
 		storeGroup.GET("", storeCtrl.List)
-		storeGroup.GET("/:id", storeCtrl.Get)
-		storeGroup.PUT("/:id", storeCtrl.Update)
 	}
 
 	// Store Product routes
@@ -69,8 +63,6 @@ func NewRouter(
 	{
 		storeProductGroup.POST("", storeProductCtrl.Create)
 		storeProductGroup.GET("", storeProductCtrl.List)
-		storeProductGroup.GET("/:id", storeProductCtrl.Get)
-		storeProductGroup.PUT("/:id", storeProductCtrl.Update)
 	}
 
 	return router
